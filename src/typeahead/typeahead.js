@@ -58,16 +58,6 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
             var newVal = interpolateValue(newValue);
             isEditable = newVal !== false;
           });
-
-          // Indicate that the specified match is the active (pre-selected) item in the list owned by this typeahead.
-          // This attribute is added or removed automatically when the `activeIdx` changes.
-          scope.$watch('activeIdx', function (index) {
-            if (index < 0) {
-              element.removeAttr('aria-activedescendant');
-            } else {
-              element.attr('aria-activedescendant', getMatchId(index));
-            }
-          });
       };
 
         var HOT_KEYS = [9, 13, 27, 38, 40];
@@ -245,9 +235,15 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
           return popupId + '-option-' + index;
         };
 
-
-
-
+    // Indicate that the specified match is the active (pre-selected) item in the list owned by this typeahead.
+    // This attribute is added or removed automatically when the `activeIdx` changes.
+    scope.$watch('activeIdx', function(index) {
+      if (index < 0) {
+        element.removeAttr('aria-activedescendant');
+      } else {
+        element.attr('aria-activedescendant', getMatchId(index));
+      }
+    });
 
         var inputIsExactMatch = function (inputValue, index) {
           if (scope.matches.length > index && inputValue) {
