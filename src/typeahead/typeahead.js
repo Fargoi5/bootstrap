@@ -33,9 +33,8 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
       var interpolateValue = function(value){
         if(value){
           return $interpolate(value)($scope);
-        } else {
-          return value;
         }
+        return value;
       };
 
       var attributesToInterpolate = [
@@ -77,7 +76,7 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
         //SUPPORTED ATTRIBUTES (OPTIONS)
 
         //minimal no of characters that needs to be entered before typeahead kicks-in
-    var minLength = originalScope.$eval(attrs.typeaheadMinLength);
+        minLength = originalScope.$eval(attrs.typeaheadMinLength);
         if (!minLength && minLength !== 0) {
           minLength = 1;
         }
@@ -90,7 +89,7 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
     var waitTime = originalScope.$eval(attrs.typeaheadWaitMs) || 0;
 
         //should it restrict model values to the ones selected from the popup only?
-    var isEditable = originalScope.$eval(attrs.typeaheadEditable) !== false;
+    isEditable = originalScope.$eval(attrs.typeaheadEditable) !== false;
     originalScope.$watch(attrs.typeaheadEditable, function (newVal) {
       isEditable = newVal !== false;
     });
